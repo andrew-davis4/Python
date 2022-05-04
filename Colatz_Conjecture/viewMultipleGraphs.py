@@ -1,0 +1,1 @@
+# this script will plot multiple graphs of the colatz conjecture on one for a good visualization of the conjecture

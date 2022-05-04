@@ -50,11 +50,11 @@ for i in range(len(word)):
     #print("_", end=" ")
 #print(underscores)
 
-tries_left = 5
+tries_left = 10
 
 for i in range(len(word)+20):
     if "_" in word_list:
-        if wrong < 5:
+        if wrong < 10:
             system("cls")
             #print("\n---Hangman---\n\n\n")
             output_word()

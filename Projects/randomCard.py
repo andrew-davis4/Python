@@ -1,4 +1,4 @@
-class bcolors:
+class textColours:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
@@ -9,190 +9,87 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-from ast import match_case
-from random import randrange
+from random import randrange as rr
 from os import system
 
+def testColours():
+    s = "\n\n{}HEADER\n{}OKBLUE\n{}OKCYAN\n{}OKGREEN\n{}WARNING\n{}FAIL\n{}ENDC\n{}BOLD\n{}UNDERLINE\n".format(textColours.HEADER, textColours.OKBLUE, textColours.OKCYAN, textColours.OKGREEN, textColours.WARNING, textColours.FAIL, textColours.ENDC, textColours.BOLD, textColours.UNDERLINE)
+
+    return s
 def card(value, suit):
     Card = ""
     match value:
         case 1:
-            Card += "A"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card      
+            Card += "A"  
         case 2:
             Card += "2"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 3:
             Card += "3"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 4:
             Card += "4"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 5:
             Card += "5"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 6:
             Card += "6"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 7:
-            Card += "7"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
+            Card += "7" 
         case 8:
             Card += "8"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 9:
             Card += "9"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 10:
             Card += "10"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
         case 11:
-            Card += "J"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
+            Card += "J" 
         case 12:
-            Card += "Q"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
+            Card += "Q"  
         case 13:
             Card += "K"
-            match suit:
-                case 1:
-                    Card += "♧"
-                case 2:
-                    Card += "♡"
-                case 3: 
-                    Card += "◇"
-                case 4:
-                    Card += "♤"
-            return Card  
+        case _:
+            Card += "{}This method was called on incorrectly".format(textColours.FAIL)
+    match suit:
+        case 1:
+            Card += "♧"
+        case 2:
+            Card += "♡"
+        case 3: 
+            Card += "◇"
+        case 4:
+            Card += "♤"
         case _:
             return Card
+    return Card
+def pickCard():
+    print("{}Card: ".format(textColours.OKGREEN), card((rr(13)+1), (rr(4)+1)))
+def coin():
+    return rr(2)+1
+def Main():
 
-print("\033[2;32;44m Welcome to guess the card game!\n")
-	
-print("\033[1;32;40m Green\033[1;37;40m")
+    print("\n{}Welcome to guess the card game!\n".format(textColours.WARNING))
+    goAgain = True
 
+    while goAgain:
+        print("Type \'card\' to pick a random card or \'coin\' to flip a coin:{}".format(textColours.OKBLUE))
 
-cardNumber = randrange(13)+1
-cardSuit = randrange(4)+1
+        winnings = ""
+        choice = input()
 
-# system("cls")
-print("Card: ",card(cardNumber, cardSuit))
+        if choice == 'coin':
+            coin1 = coin()
+            if coin1 == 1:
+                print("Coin: tails")
+            else:
+                print("Coin: heads")
+        else:
+            pickCard()
 
-coin = randrange(2)+1
+        choice1 = input("Would you like to go again? (y/n)\n")
+        if choice1 == 'n':
+            goAgain = False
+            system("cls")
+            print("Thanks for playing")
 
-if coin == 1:
-    print("Coin: tails")
-else:
-    print("Coin: heads")
-
-
-
-
+system("cls")
+# print("{}".format(textColours.ENDC))
+Main()
+# print(testColours())
