@@ -21,9 +21,9 @@ print(car_dict.get("model"))
 print(len(car_dict))
 
 if "model" in car_dict:
-    print("\nYes, 'model' is in car_dict")
+    print("\nYes, \'model\' is in car_dict")
 else:
-    print("\nNo, 'model' is not in car_dict")
+    print("\nNo, \'model\' is not in car_dict")
 
 #print(car_dict['default_val'])
 
@@ -90,8 +90,6 @@ my_family = {
 
 #to print nested dictionaries, you need to use nested for loops
 print("\n\nFamily: \n---------")
-
-
 
 
 for key in my_family:
