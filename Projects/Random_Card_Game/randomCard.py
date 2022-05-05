@@ -101,7 +101,9 @@ def Main():
     # TESTS
     # coinOrCard() # play a simple game, all it does is flips a coin or picks a card...
     # print(testColours()) # prints sample text colours
-    
+
+    # MAIN GAME
+    coinOrCard()
 
     
 system("cls")
