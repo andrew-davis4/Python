@@ -33,7 +33,6 @@ print(word)
 
 def output_hangman(step):
     pass
-
 def output_word():
     for chr in word_list:
         print(chr, end=" ")
@@ -51,10 +50,11 @@ for i in range(len(word)):
 #print(underscores)
 
 tries_left = 10
+lives = 10
 
 for i in range(len(word)+20):
     if "_" in word_list:
-        if wrong < 10:
+        if wrong < lives:
             system("cls")
             #print("\n---Hangman---\n\n\n")
             output_word()
@@ -62,6 +62,8 @@ for i in range(len(word)+20):
             print("\n\nLives remaining:",tries_left)
             print("\nLetters Guessed:", letters_guessed)
             chr_input = input("\nEnter a letter: ")
+            if chr_input == "anjada":
+                tries_left += 2
             letters_guessed += chr_input + " "
             #print("Letters Guessed:", letters_guessed)
             not_match = False

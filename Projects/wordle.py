@@ -1,3 +1,5 @@
+#!unfinished as of May 4th, 2022
+
 import requests
 from random import randint
 from os import system

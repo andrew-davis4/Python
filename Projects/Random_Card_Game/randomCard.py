@@ -11,9 +11,13 @@ class textColours:
 
 from random import randrange as rr
 from os import system
+import PySimpleGUI as sg
+
+# sg.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
 
 def testColours():
-    s = "\n\n{}HEADER\n{}OKBLUE\n{}OKCYAN\n{}OKGREEN\n{}WARNING\n{}FAIL\n{}ENDC\n{}BOLD\n{}UNDERLINE\n".format(textColours.HEADER, textColours.OKBLUE, textColours.OKCYAN, textColours.OKGREEN, textColours.WARNING, textColours.FAIL, textColours.ENDC, textColours.BOLD, textColours.UNDERLINE)
+    system("cls")
+    s = "\n\n{}HEADER\n{}OKBLUE\n{}OKCYAN\n{}OKGREEN\n{}WARNING\n{}FAIL\n{}ENDC\n{}BOLD\n{}UNDERLINE{}\n".format(textColours.HEADER, textColours.OKBLUE, textColours.OKCYAN, textColours.OKGREEN, textColours.WARNING, textColours.FAIL, textColours.ENDC, textColours.BOLD, textColours.UNDERLINE, textColours.ENDC)
 
     return s
 def card(value, suit):
@@ -60,16 +64,14 @@ def card(value, suit):
             return Card
     return Card
 def pickCard():
-    print("{}Card: ".format(textColours.OKGREEN), card((rr(13)+1), (rr(4)+1)))
+    print("\nCard: ", card((rr(13)+1), (rr(4)+1)))
 def coin():
     return rr(2)+1
-def Main():
-
-    print("\n{}Welcome to guess the card game!\n".format(textColours.WARNING))
+def coinOrCard():
     goAgain = True
 
     while goAgain:
-        print("Type \'card\' to pick a random card or \'coin\' to flip a coin:{}".format(textColours.OKBLUE))
+        print("{}Type \'card\' to pick a random card or \'coin\' to flip a coin:{}".format(textColours.WARNING, textColours.OKBLUE))
 
         winnings = ""
         choice = input()
@@ -77,19 +79,31 @@ def Main():
         if choice == 'coin':
             coin1 = coin()
             if coin1 == 1:
-                print("Coin: tails")
+                print("\nCoin: tails")
             else:
-                print("Coin: heads")
-        else:
+                print("\nCoin: heads")
+        elif choice == 'card':
             pickCard()
+        else:
+            system("cls")
+            print("\n\n{}Invalid Input{}".format(textColours.FAIL, textColours.ENDC))
+            break
 
-        choice1 = input("Would you like to go again? (y/n)\n")
+        choice1 = input("\n{}Would you like to go again? (y/n)\n".format(textColours.WARNING))
         if choice1 == 'n':
             goAgain = False
             system("cls")
-            print("Thanks for playing")
+            print("{}Thanks for playing".format(textColours.WARNING))
+        system("cls")
+def Main():
+    print("\n{}Welcome to guess the card game!\n".format(textColours.WARNING))
 
+    # TESTS
+    # coinOrCard() # play a simple game, all it does is flips a coin or picks a card...
+    # print(testColours()) # prints sample text colours
+    
+
+    
 system("cls")
-# print("{}".format(textColours.ENDC))
 Main()
-# print(testColours())
+# print("{}".format(textColours.ENDC))
