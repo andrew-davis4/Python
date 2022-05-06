@@ -64,13 +64,14 @@ def card(value, suit):
             return Card
     return Card
 def pickCard():
-    print("\nCard: ", card((rr(13)+1), (rr(4)+1)))
+    return card((rr(13)+1), (rr(4)+1))
 def coin():
     return rr(2)+1
 def coinOrCard():
     goAgain = True
 
     while goAgain:
+        system("cls")
         print("{}Type \'card\' to pick a random card or \'coin\' to flip a coin:{}".format(textColours.WARNING, textColours.OKBLUE))
 
         winnings = ""
@@ -83,29 +84,60 @@ def coinOrCard():
             else:
                 print("\nCoin: heads")
         elif choice == 'card':
-            pickCard()
+            print("\nCard: ", pickCard())
         else:
             system("cls")
             print("\n\n{}Invalid Input{}".format(textColours.FAIL, textColours.ENDC))
             break
-
         choice1 = input("\n{}Would you like to go again? (y/n)\n".format(textColours.WARNING))
         if choice1 == 'n':
             goAgain = False
             system("cls")
-            print("{}Thanks for playing".format(textColours.WARNING))
-        system("cls")
-def Main():
+            print("{}Thanks for playing{}".format(textColours.WARNING, textColours.ENDC))
+def mainGame():
     print("\n{}Welcome to guess the card game!\n".format(textColours.WARNING))
+    cardChoice = input("Pick a card any card!: (i.e. Ace of clubs, 3 of diamonds, ...)\n").split()
 
-    # TESTS
-    # coinOrCard() # play a simple game, all it does is flips a coin or picks a card...
-    # print(testColours()) # prints sample text colours
+    # print(cardChoice) # Test
 
-    # MAIN GAME
-    coinOrCard()
+    # Car attributes:
+    cardValue = ""
+    cardSuit = ""
+    cardColour = ""
 
+    if cardChoice[0] == 'Ace' or cardChoice[0] == 'ace':
+        cardValue = 'A'
+    elif cardChoice[0] == 'Jack' or cardChoice[0] == 'jack':
+        cardValue = "J"
+    elif cardChoice[0] == 'Queen' or cardChoice[0] == 'queen':
+        cardValue = "Q"
+    elif cardChoice[0] == 'King' or cardChoice[0] == 'king':
+        cardValue = "K"
+    else:
+        cardValue = cardChoice[0]
+    match cardChoice[2]:
+        case 'diamonds': 
+            cardSuit = "◇"
+            cardColour = "R"
+        case 'spades':
+           cardSuit = "♤"
+           cardColour = "B"
+        case 'clubs':
+            cardSuit = "♧"
+            cardColour = "B"
+        case 'hearts':
+            cardSuit = "♡"
+            cardColour = "R"
     
+    # print(cardValue+cardSuit,"",cardColour)
+    print("Random card: ", pickCard())
+
 system("cls")
-Main()
+# TESTS
+# coinOrCard() # play a simple game, all it does is flips a coin or picks a card...
+# print(testColours()) # prints sample text colours
+
+# MAIN GAME
+mainGame()
+
 # print("{}".format(textColours.ENDC))
