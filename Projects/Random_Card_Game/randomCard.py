@@ -96,7 +96,8 @@ def coinOrCard():
             print("{}Thanks for playing{}".format(textColours.WARNING, textColours.ENDC))
 def mainGame():
     print("\n{}Welcome to guess the card game!\n".format(textColours.WARNING))
-    cardChoice = input("Pick a card any card!: (i.e. Ace of clubs, 3 of diamonds, ...)\n").split()
+    card1 = input("Pick a card any card!: (i.e. Ace of clubs, 3 of diamonds, ...)\n")
+    cardChoice = card1.split()
 
     # print(cardChoice) # Test
 
@@ -104,6 +105,7 @@ def mainGame():
     cardValue = ""
     cardSuit = ""
     cardColour = ""
+    winnings = 0
 
     if cardChoice[0] == 'Ace' or cardChoice[0] == 'ace':
         cardValue = 'A'
@@ -130,7 +132,40 @@ def mainGame():
             cardColour = "R"
     
     # print(cardValue+cardSuit,"",cardColour)
-    print("Random card: ", pickCard())
+    randomCard = pickCard()
+    # print("Random card: ", randomCard)
+
+    randomCardSplit = list(randomCard)
+    # print(randomCardSplit)
+    randomCardValue = randomCardSplit[0]
+    randomCardSuit = randomCardSplit[1]
+    if randomCardSuit == "♡" or randomCardSuit == "◇":
+        randomCardColour = "R"
+    else:
+        randomCardColour = "B"
+
+    system("cls")
+    print("{}Random card: ".format(textColours.OKBLUE),randomCard, "\nYour card: ",cardValue+cardSuit, "{}".format(textColours.WARNING))
+    if randomCard == cardChoice:
+        print("Wow! You are one lucky player. \n{}You win 40${}".format(textColours.OKGREEN, textColours.WARNING))
+        winnings = 40
+    else:
+        if randomCardValue == cardValue:
+            winnings = 4
+            print("You guessed", cardValue+cardSuit, "which matches with the", randomCardValue,"of", randomCard,"\n{}You win $4{}".format(textColours.OKGREEN, textColours.WARNING))
+        else:
+            if randomCardSuit == cardSuit:
+                winnings = 2
+                print("You guessed", cardValue+cardSuit, "which matches with the", randomCardSuit,"of", randomCard,"\n{}You win $2{}".format(textColours.OKGREEN, textColours.WARNING))
+            else:
+                if randomCardColour = cardColour:
+                    print("You guessed the correct colour only!\n{}You win $1{}".format(textColours.OKGREEN, textColours.WARNING)))
+                    winnings = 1
+                else:
+                    print("Unlucky! You guessed nothing correctly.\nYou win 0$")
+
+    
+    
 
 system("cls")
 # TESTS
