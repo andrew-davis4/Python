@@ -17,7 +17,7 @@ from random import randrange as rr
 from os import system
 import PySimpleGUI as sg
 
-#pysimplegui demo
+# pysimplegui demo
 # sg.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
 
 #methods
