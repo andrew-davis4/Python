@@ -1,6 +1,6 @@
 from os import system
 
-from requests.sessions import default_headers
+# from requests.sessions import default_headers
 
 
 #make a dictionary of (Key: Value,) items:

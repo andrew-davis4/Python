@@ -12,6 +12,7 @@ class textColours:
 from random import randrange as rr
 from os import system
 import PySimpleGUI as sg
+# thanks = False
 
 # sg.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
 
@@ -95,84 +96,112 @@ def coinOrCard():
             system("cls")
             print("{}Thanks for playing{}".format(textColours.WARNING, textColours.ENDC))
 def mainGame():
-    print("\n{}Welcome to guess the card game!\n".format(textColours.WARNING))
-    card1 = input("Pick a card any card!: (i.e. Ace of clubs, 3 of diamonds, ...)\n")
-    cardChoice = card1.split()
+    system("cls")
 
-    # print(cardChoice) # Test
+    repeat = True
 
-    # Car attributes:
-    cardValue = ""
-    cardSuit = ""
-    cardColour = ""
-    winnings = 0
-
-    if cardChoice[0] == 'Ace' or cardChoice[0] == 'ace':
-        cardValue = 'A'
-    elif cardChoice[0] == 'Jack' or cardChoice[0] == 'jack':
-        cardValue = "J"
-    elif cardChoice[0] == 'Queen' or cardChoice[0] == 'queen':
-        cardValue = "Q"
-    elif cardChoice[0] == 'King' or cardChoice[0] == 'king':
-        cardValue = "K"
-    else:
-        cardValue = cardChoice[0]
-    match cardChoice[2]:
-        case 'diamonds': 
-            cardSuit = "◇"
-            cardColour = "R"
-        case 'spades':
-           cardSuit = "♤"
-           cardColour = "B"
-        case 'clubs':
-            cardSuit = "♧"
-            cardColour = "B"
-        case 'hearts':
-            cardSuit = "♡"
-            cardColour = "R"
-    
-    # print(cardValue+cardSuit,"",cardColour)
-    randomCard = pickCard()
-    # print("Random card: ", randomCard)
-
-    randomCardSplit = list(randomCard)
-    # print(randomCardSplit)
-    randomCardValue = randomCardSplit[0]
-    randomCardSuit = randomCardSplit[1]
-    if randomCardSuit == "♡" or randomCardSuit == "◇":
-        randomCardColour = "R"
-    else:
-        randomCardColour = "B"
+    print("\n{}Welcome to guess the card game!\n\n".format(textColours.WARNING))
+    balance = int(input("{}First start by entering your 'Data Dollar' bank balance: {}".format(textColours.OKGREEN, textColours.WARNING)))
+    balance -= 2
 
     system("cls")
-    print("{}Random card: ".format(textColours.OKBLUE),randomCard, "\nYour card: ",cardValue+cardSuit, "{}".format(textColours.WARNING))
-    if randomCard == cardChoice:
-        print("Wow! You are one lucky player. \n{}You win 40${}".format(textColours.OKGREEN, textColours.WARNING))
-        winnings = 40
-    else:
-        if randomCardValue == cardValue:
-            winnings = 4
-            print("You guessed", cardValue+cardSuit, "which matches with the", randomCardValue,"of", randomCard,"\n{}You win $4{}".format(textColours.OKGREEN, textColours.WARNING))
+
+    while(repeat):
+        randomCard = pickCard()
+        print(randomCard) # Test
+
+        card1 = input("Pick a card any card!: (i.e. Ace of clubs, 3 of diamonds, ...)\n")
+        cardChoice = card1.split()
+
+        print(cardChoice) # Test
+
+        # Car attributes:
+        cardValue = ""
+        cardSuit = ""
+        cardColour = ""
+        winnings = 0
+
+        if cardChoice[0] == 'Ace' or cardChoice[0] == 'ace':
+            cardValue = 'A'
+        elif cardChoice[0] == 'Jack' or cardChoice[0] == 'jack':
+            cardValue = "J"
+        elif cardChoice[0] == 'Queen' or cardChoice[0] == 'queen':
+            cardValue = "Q"
+        elif cardChoice[0] == 'King' or cardChoice[0] == 'king':
+            cardValue = "K"
         else:
-            if randomCardSuit == cardSuit:
-                winnings = 2
-                print("You guessed", cardValue+cardSuit, "which matches with the", randomCardSuit,"of", randomCard,"\n{}You win $2{}".format(textColours.OKGREEN, textColours.WARNING))
+            cardValue = cardChoice[0]
+        match cardChoice[2]:
+            case 'diamonds': 
+                cardSuit = "◇"
+                cardColour = "R"
+            case 'spades':
+                cardSuit = "♤"
+                cardColour = "B"
+            case 'clubs':
+                cardSuit = "♧"
+                cardColour = "B"
+            case 'hearts':
+                cardSuit = "♡"
+                cardColour = "R"
+
+        card2 = cardValue+cardSuit
+        # system("cls")
+        # print(card2)
+        
+        # print(cardValue+cardSuit,"",cardColour)
+        # randomCard = pickCard()
+        # print("Random card: ", randomCard)
+
+        randomCardSplit = list(randomCard)
+        # print(randomCardSplit)
+        randomCardValue = randomCardSplit[0]
+        randomCardSuit = randomCardSplit[1]
+        if randomCardSuit == "♡" or randomCardSuit == "◇":
+            randomCardColour = "R"
+        else:
+            randomCardColour = "B"
+
+        # system("cls")
+        print("{}Random card: ".format(textColours.OKBLUE),randomCard, "\nYour card: ",cardValue+cardSuit, "{}\n".format(textColours.WARNING))
+        if randomCard == card2:
+            print("Wow! You are one lucky player. \n\n{}You win 40${}".format(textColours.OKGREEN, textColours.WARNING))
+            winnings = 40
+        else:
+            if randomCardValue == cardValue:
+                winnings = 4
+                print("You guessed", cardValue+cardSuit, "which matches with the", randomCardValue,"of", randomCard,"\n\n{}You win $4{}".format(textColours.OKGREEN, textColours.WARNING))
             else:
-                if randomCardColour = cardColour:
-                    print("You guessed the correct colour only!\n{}You win $1{}".format(textColours.OKGREEN, textColours.WARNING)))
-                    winnings = 1
+                if randomCardSuit == cardSuit:
+                    winnings = 2
+                    print("You guessed", cardValue+cardSuit, "which matches with the", randomCardSuit,"of", randomCard,"\n\n{}You win $2{}".format(textColours.OKGREEN, textColours.WARNING))
                 else:
-                    print("Unlucky! You guessed nothing correctly.\nYou win 0$")
+                    if randomCardColour == cardColour:
+                        print("You guessed the correct colour only!\n\n{}You win $1{}".format(textColours.OKGREEN, textColours.WARNING))
+                        winnings = 1
+                    else:
+                        print("Unlucky! You guessed nothing correctly.\n\n{}You win 0${}".format(textColours.FAIL, textColours.WARNING))
+        
+        # system("cls")
 
-    
-    
+        balance += winnings
+        print("\n\nYour balance is",balance)
+        repeatChoice = input("\n\n{}Would you like to play again? ('y'/'n')\n{}".format(textColours.OKCYAN, textColours.WARNING))
+        if repeatChoice == 'n': 
+            repeat = False
+            print("{}\n\nThanks for playing{}".format(textColours.OKCYAN, textColours.ENDC))
+        else: 
+            balance -= 2
+            system("cls")
 
-system("cls")
+# system("cls")
 # TESTS
 # coinOrCard() # play a simple game, all it does is flips a coin or picks a card...
 # print(testColours()) # prints sample text colours
 
 # MAIN GAME
 mainGame()
+# if thanks is True:
+#     print("{}Thanks for playing{}".format(textColours.OKCYAN, textColours.ENDC))
 
 # print("{}".format(textColours.ENDC))
