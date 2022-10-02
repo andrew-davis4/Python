@@ -1,3 +1,4 @@
+#textcolours class
 class textColours:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -9,18 +10,26 @@ class textColours:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+#imports
+from curses import endwin
+from msilib import text
 from random import randrange as rr
 from os import system
 import PySimpleGUI as sg
 # thanks = False
 
+# pysimplegui demo
 # sg.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
 
-def testColours():
+#methods
+def clear():
     system("cls")
+def testColours():
+    clear()
     s = "\n\n{}HEADER\n{}OKBLUE\n{}OKCYAN\n{}OKGREEN\n{}WARNING\n{}FAIL\n{}ENDC\n{}BOLD\n{}UNDERLINE{}\n".format(textColours.HEADER, textColours.OKBLUE, textColours.OKCYAN, textColours.OKGREEN, textColours.WARNING, textColours.FAIL, textColours.ENDC, textColours.BOLD, textColours.UNDERLINE, textColours.ENDC)
 
     return s
+
 def card(value, suit):
     Card = ""
     match value:
@@ -51,7 +60,7 @@ def card(value, suit):
         case 13:
             Card += "K"
         case _:
-            Card += "{}This method was called on incorrectly".format(textColours.FAIL)
+            Card += "{}This method was called on incorrectly{}".format(textColours.FAIL, textColours.ENDC)
     match suit:
         case 1:
             Card += "♧"
@@ -72,7 +81,7 @@ def coinOrCard():
     goAgain = True
 
     while goAgain:
-        system("cls")
+        clear()
         print("{}Type \'card\' to pick a random card or \'coin\' to flip a coin:{}".format(textColours.WARNING, textColours.OKBLUE))
 
         winnings = ""
@@ -95,6 +104,7 @@ def coinOrCard():
             goAgain = False
             system("cls")
             print("{}Thanks for playing{}".format(textColours.WARNING, textColours.ENDC))
+
 def mainGame():
     system("cls")
 
@@ -195,6 +205,53 @@ def mainGame():
             system("cls")
 
 # system("cls")
+    print("{}Welcome to guess the card game!\n".format(textColours.FAIL))
+
+    bankBalance = input("First we need to know your bank balance: {}".format(textColours.WARNING))
+
+    clear()
+
+    cardChoice = input("Pick a card any card!: (i.e. Ace of clubs, 3 of diamonds, ...)\n").split()
+
+    # Test
+    # print(cardChoice)
+
+    # Car attributes:
+    cardValue = ""
+    cardSuit = ""
+    cardColour = ""
+    
+    if cardChoice[0] == 'Ace' or cardChoice[0] == 'ace':
+        cardValue = 'A'
+    elif cardChoice[0] == 'Jack' or cardChoice[0] == 'jack':
+        cardValue = "J"
+    elif cardChoice[0] == 'Queen' or cardChoice[0] == 'queen':
+        cardValue = "Q"
+    elif cardChoice[0] == 'King' or cardChoice[0] == 'king':
+        cardValue = "K"
+    else:
+        cardValue = cardChoice[0]
+    match cardChoice[2]:
+        case 'diamonds': 
+            cardSuit = "◇"
+            cardColour = "R"
+        case 'spades':
+           cardSuit = "♤"
+           cardColour = "B"
+        case 'clubs':
+            cardSuit = "♧"
+            cardColour = "B"
+        case 'hearts':
+            cardSuit = "♡"
+            cardColour = "R"
+
+    print("Your Card: ", cardValue+cardSuit)
+
+    print("Random card: ", pickCard(), "{}".format(textColours.ENDC))
+
+#clear console
+clear()
+
 # TESTS
 # coinOrCard() # play a simple game, all it does is flips a coin or picks a card...
 # print(testColours()) # prints sample text colours
