@@ -42,8 +42,8 @@ while j<100:
 # ax.set_yticks(np.arange(min_y, max_y, step=step_y))
 
 # --axis labels--
-plt.xlabel('x')
-plt.ylabel('y')
+plt.xlabel('Number')
+plt.ylabel('Total Stopping Time (TST)')
 
 plt.plot(x,y)
 
